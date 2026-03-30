@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="exposeMainData">
+
+	<select id="getEducationData" resultType="com.psj.project.model.EducationModel">
+		SELECT 
+			school_name AS schoolName,
+			CASE 
+		        WHEN school_type = 1 THEN '고등학교'
+		        WHEN school_type = 2 THEN '전문대'
+		        WHEN school_type = 3 THEN '대학교'
+		        WHEN school_type = 4 THEN '대학원'
+		        ELSE '기타'
+		    END AS schoolType,
+			admit_graduate AS admitGraduate,
+			entrance_ceremony AS entranceCeremony,
+			major,
+			learned_subject AS learnedSubject,
+			description
+		FROM
+			Education
+		ORDER BY
+			school_type ASC
+	</select>
+
+	<select id="getPersonalInfo" resultType="com.psj.project.model.PersonalInfoModel">
+		SELECT 
+			birthday, 
+			address, 
+			phone_number AS phoneNumber, 
+			image_ori_name AS imageOriName, 
+			image_path AS imagePath, 
+			image_upload_name AS imageUploadName
+		FROM 
+			PersonalInfo
+	</select>
+
+	<select id="getActivities" resultType="com.psj.project.model.ActivitiesModel">
+		SELECT
+			title,
+			activity_start_date AS activityStartDate, 
+			activity_end_date AS activityEndDate,
+			description
+		FROM 
+			Activities
+	</select>
+	
+	<select id="getQualifications" resultType="com.psj.project.model.QualificationsModel">
+		SELECT
+			seq, 
+			name, 
+			step, 
+			acquired_date AS acquiredDate
+		FROM 
+			Qualifications
+		ORDER BY
+			acquiredDate desc
+	</select>
+		
+	<select id="getCompanies" resultType="com.psj.project.model.CompanyModel">
+		SELECT
+			seq,
+			company_name AS companyName,
+			belonging, 
+			position, 
+			work_start_date AS workStartDate, 
+			work_end_date AS workEndDate 
+		FROM
+			Company
+		ORDER BY
+			workStartDate desc
+	</select>
+	
+	<select id="getCompanyManageds" resultType="com.psj.project.model.CompanyManagedModel">
+		SELECT
+			title,
+			description,
+			company_seq AS companySeq
+		FROM
+			CompanyManaged
+	</select>
+	
+	<select id="getProjects" resultType="com.psj.project.model.ProjectModel">
+		SELECT 
+			seq, 
+			title, 
+			project_start_date AS projectStartDate, 
+			project_end_date AS projectEndDate, 
+			description, 
+			company_seq AS companySeq
+		FROM 
+			Project
+	</select>
+	
+	<select id="getProjectDescriptions" resultType="com.psj.project.model.ProjectDescriptionModel">
+		SELECT 
+			seq, 
+			title, 
+			description, 
+			project_seq AS projectSeq 
+		FROM 
+			ProjectDescription
+	</select>
+	
+	<select id="getSkills" resultType="string">
+		SELECT
+			skill_name AS skillName
+		FROM 
+			Skills
+	</select>
+</mapper>

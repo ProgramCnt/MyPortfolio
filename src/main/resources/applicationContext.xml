@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans         https://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/tx            https://www.springframework.org/schema/tx/spring-tx.xsd
+         http://www.springframework.org/schema/aop           https://www.springframework.org/schema/aop/spring-aop.xsd
+         http://mybatis.org/schema/mybatis-spring            https://mybatis.org/schema/mybatis-spring.xsd">
+
+  <!-- (선택) MyBatis 매퍼 스캔: 인터페이스에 @Mapper 없이도 스캔 -->
+  <!-- 기존에 @MapperScan 사용 중이면, 그건 제거하고 아래만 쓰세요. -->
+  <mybatis:scan base-package="com.psj.project.mapper"/>
+
+  <!-- 전역 트랜잭션 규칙: 메서드 이름 패턴별로 읽기전용/쓰기 지정 -->
+  <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <tx:attributes>
+      <!-- 조회 계열: read-only -->
+      <tx:method name="get*" read-only="true"/>
+      <tx:method name="find*" read-only="true"/>
+      <tx:method name="list*" read-only="true"/>
+      <tx:method name="search*" read-only="true"/>
+
+      <!-- 쓰기 계열: 기본(런타임 예외 시 롤백) -->
+      <tx:method name="save*"/>
+      <tx:method name="insert*"/>
+      <tx:method name="update*"/>
+      <tx:method name="delete*"/>
+      <tx:method name="*"/>
+    </tx:attributes>
+  </tx:advice>
+
+  <!-- 트랜잭션을 적용할 대상(포인트컷): 서비스 레이어 전체 -->
+  <aop:config>
+    <aop:pointcut id="serviceLayer"
+        expression="execution(* com.psj.project.service..*(..))"/>
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceLayer"/>
+  </aop:config>
+
+</beans>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserData">
+
+	<select id="getUserData" resultType="com.psj.project.model.UserDataModel">
+		SELECT
+			*
+		FROM
+			GameUser
+	</select>
+	
+	<insert id="regUserData" parameterType="Map">
+		INSERT INTO GameUser 
+		(
+	      	login_id,
+	      	[password],
+	      	birthdate
+	    )
+	    VALUES 
+	    (
+	      	#{loginId},
+	      	#{password},
+	      	DATEFROMPARTS(#{birthYear}, #{birthMonth}, #{birthDay})
+	    )
+	</insert>
+
+	<select id="userLogin" resultType="com.psj.project.model.UserDataModel" parameterType="Map">
+		SELECT
+			*
+		FROM
+			GameUser
+		WHERE
+			login_id = #{loginId}
+		and
+			password = #{password}
+	</select>
+
+</mapper>
