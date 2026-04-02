@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import com.psj.project.ApiKey;
 import com.psj.project.model.CompanyModel;
 import com.psj.project.model.UserDataModel;
 import com.psj.project.service.ExposeMainDataService;
@@ -48,6 +49,7 @@ public class ApiController {
 		mv.addObject("companyManagedList", mainService.getCompanyManageds());
 		mv.addObject("projectList", mainService.getProjects());
 		mv.addObject("projectDescriptionList", mainService.getProjectDescriptoins());
+		mv.addObject("mapAppKey", ApiKey.MapApiKey);
 		
 		mv.setViewName("test");
 		return mv;

@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio</title>
   <link rel="stylesheet" href="<c:url value='/css/test.css'/>">
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${mapAppKey}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -229,6 +231,7 @@
                 <span class="footer-item"><strong>본 페이지의 퍼블리싱은 Chat GPT 사용하여 개발된 페이지입니다.</strong></span></span>
               </p>
             </div>
+            <div id="map" style="width:1000px;height:400px;"></div>
             <p class="muted">© Portfolio</p>
           </div>
         </footer>
@@ -237,3 +240,26 @@
   </main>
 </body>
 </html>
+
+<script>
+var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+var options = { //지도를 생성할 때 필요한 기본 옵션
+	center: "",
+	level: 3 //지도의 레벨(확대, 축소 정도)
+};
+var map = "";
+var markerPosition;
+var marker;
+
+kakao.maps.load(function () {
+    options.center = new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+    map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+    marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+})
+
+marker.setMap(map);
+
+</script>
