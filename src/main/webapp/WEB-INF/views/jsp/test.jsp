@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio</title>
   <link rel="stylesheet" href="<c:url value='/css/test.css'/>">
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${mapAppKey}"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${mapAppKey}&autoload=false"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -43,12 +43,12 @@
           <article class="card profile-card">
             <div class="profile-media" aria-label="프로필 이미지">
               <!-- image_path/image_upload_name을 이용해 렌더링(서버/프론트 구현 시) -->
-              <img class="profile-image" src="" alt="프로필 이미지" />
+              <img class="profile-image" src="/image/oo.jpg" alt="프로필 이미지" />
             </div>
             <div class="profile-body">
               <dl class="kv">
                 <div class="kv-row"><dt>생년월일</dt><dd data-field="birthday">2002-03-26</dd></div>
-                <div class="kv-row"><dt>전화번호</dt><dd data-field="phone_number">010-0000-0000</dd></div>
+                <div class="kv-row"><dt>전화번호</dt><dd data-field="phone_number">010-9776-2504</dd></div>
               </dl>
 
               <p class="profile-intro" data-field="profile_intro">(API 개발 직무 희망자입니다.)</p>
@@ -225,7 +225,7 @@
           <div class="container">
             <div class="footer-info" aria-label="하단 정보">
               <p class="footer-line">
-                <span class="footer-item"><strong>주소</strong>: <span data-field="address">경기도 수원시 영통구 삼성로 129(매탄동)</span></span>
+                <span class="footer-item"><strong>주소</strong>: <span data-field="address">서울특별시 강남구 자곡로 11길 28</span></span>
               </p>
               <p class="footer-line">
                 <span class="footer-item"><strong>본 페이지의 퍼블리싱은 Chat GPT 사용하여 개발된 페이지입니다.</strong></span></span>
@@ -242,24 +242,26 @@
 </html>
 
 <script>
-var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-var options = { //지도를 생성할 때 필요한 기본 옵션
-	center: "",
-	level: 3 //지도의 레벨(확대, 축소 정도)
-};
-var map = "";
-var markerPosition;
-var marker;
+var latitude = 37.478683518401375; //위도 좌표
+var longitude = 127.10797271272384; //경도 좌표
 
 kakao.maps.load(function () {
-    options.center = new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-    map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-    markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
-    marker = new kakao.maps.Marker({
+    var container = document.getElementById('map');
+
+    var options = {
+        center: new kakao.maps.LatLng(latitude, longitude),
+        level: 3
+    };
+
+    var map = new kakao.maps.Map(container, options);
+
+    var markerPosition = new kakao.maps.LatLng(latitude, longitude);
+
+    var marker = new kakao.maps.Marker({
         position: markerPosition
     });
-})
 
-marker.setMap(map);
+    marker.setMap(map);
+});
 
 </script>
