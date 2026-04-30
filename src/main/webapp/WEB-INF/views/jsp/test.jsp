@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.psj.project.util.DateValidityUtil" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,10 +145,10 @@
 	              <header class="card-header">
 	                <h3 class="item-title" data-field="title">${project.title}</h3>
 	                <p class="date-range">
-	                  <time data-field="project_start_date">${project.projectStartDate}</time>
+	                  <time data-field="project_start_date">${DateValidityUtil.getYearMonth(project.projectStartDate)}</time>
 	                  <span aria-hidden="true">~</span>
 	                  <c:if test="${!project.projectEndDate.isEmpty()}">
-	                  	<time data-field="project_end_date">${project.projectEndDate}</time>
+	                  	<time data-field="project_end_date">${DateValidityUtil.getYearMonth(project.projectEndDate)}</time>
 	                  </c:if>
 	                </p>
 	              </header>
@@ -184,9 +185,9 @@
 	              <div class="timeline-head">
 	                <h3 class="item-title" data-field="title">${acitvity.title }</h3>
 	                <p class="date-range">
-	                  <time data-field="activity_start_date">${acitvity.activityStartDate }</time>
+	                  <time data-field="activity_start_date">${DateValidityUtil.getYearMonth(acitvity.activityStartDate) }</time>
 	                  <span aria-hidden="true">~</span>
-	                  <time data-field="activity_end_date">${acitvity.activityEndDate }</time>
+	                  <time data-field="activity_end_date">${DateValidityUtil.getYearMonth(acitvity.activityEndDate) }</time>
 	                </p>
 	              </div>
 	              <div class="item-desc" data-field="description">${acitvity.description }</div>

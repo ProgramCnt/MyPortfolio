@@ -74,4 +74,8 @@ public final class DateValidityUtil {
         try { requireValid(y, m, d); return true; }
         catch (IllegalArgumentException e) { return false; }
     }
+    
+    public static String getYearMonth(String date) {
+    	return date.substring(0, date.lastIndexOf("-"));
+    }
 }
