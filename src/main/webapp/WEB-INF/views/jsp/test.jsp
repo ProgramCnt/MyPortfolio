@@ -45,6 +45,7 @@
             <div class="profile-media" aria-label="프로필 이미지">
               <!-- image_path/image_upload_name을 이용해 렌더링(서버/프론트 구현 시) -->
               <img class="profile-image" src="/image/oo.jpg" alt="프로필 이미지" />
+<!--               <img class="profile-image" src="" alt="프로필 이미지" /> -->
             </div>
             <div class="profile-body">
               <dl class="kv">
